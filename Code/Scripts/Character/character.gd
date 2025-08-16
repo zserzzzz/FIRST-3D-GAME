@@ -1,7 +1,12 @@
 extends CharacterBody3D
 
+# --- Preload ---
+const HITBOX_CROUCH = preload("res://Assets/characters/Hitboxes/character_crouching.tres")
+const HITBOX_STAND = preload("res://Assets/characters/Hitboxes/character_standing.tres")
+
+
 # --- Movement ---
-const SPEED = 10.0
+var SPEED = 10.0
 const JUMP_VELOCITY = 4.5
 
 # --- Look sensitivity ---
@@ -13,10 +18,14 @@ var vertical_look := 0.0
 var target_horizontal_look := 0.0
 var target_vertical_look := 0.0
 
+# --- crouching ---
+var crouching = false
+
 # --- References ---
 @onready var cam: Camera3D = $Camera3D
 @onready var anim_player: AnimationPlayer = $Model/AnimationPlayer
 @onready var model: Node3D = $Model
+@onready var hitbox: CollisionShape3D = $CollShape
 
 
 func _ready():
@@ -26,6 +35,14 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		target_horizontal_look -= event.relative.x * MOUSE_SENSITIVITY
 		target_vertical_look -= event.relative.y * MOUSE_SENSITIVITY
+	if event.is_action_pressed("crouch") and crouching == false:
+		hitbox.shape = HITBOX_CROUCH
+		crouching = true
+		SPEED = 5
+	elif event.is_action_pressed("crouch"):
+		hitbox.shape = HITBOX_STAND
+		crouching = false
+		SPEED = 10
 
 func _process(delta):
 	# Controller look input (Right Stick: axis 2 = horizontal, axis 3 = vertical)
@@ -69,12 +86,17 @@ func _physics_process(delta: float) -> void:
 	if direction.length() > 0.1:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		if anim_player.current_animation != "walk":
+		if anim_player.current_animation != "walk" and crouching == false:
+			anim_player.speed_scale = 1
+			anim_player.play("walk")
+		elif anim_player.current_animation != "walk":
+			anim_player.speed_scale = 0.5
 			anim_player.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		if anim_player.current_animation != "idle":
+			anim_player.speed_scale = 1
 			anim_player.play("idle")
 
 	move_and_slide()

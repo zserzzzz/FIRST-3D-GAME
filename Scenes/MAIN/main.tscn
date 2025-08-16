@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwhhv13i58gra"]
+[gd_scene load_steps=12 format=3 uid="uid://dwhhv13i58gra"]
 
 [ext_resource type="Texture2D" uid="uid://pc7yjfcfbrgf" path="res://icon.svg" id="1_2sdpx"]
 [ext_resource type="PackedScene" uid="uid://bjpsb6ag0ycu6" path="res://Scenes/Character/character.tscn" id="1_wkls3"]
@@ -15,24 +15,25 @@ sky_material = SubResource("PanoramaSkyMaterial_j0i0r")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_6j7wv"]
-background_mode = 2
-background_energy_multiplier = 0.0
+background_mode = 1
+background_color = Color(0, 0.160784, 0.588235, 1)
+background_energy_multiplier = 1.6
 sky = SubResource("Sky_u5tma")
 sky_custom_fov = 29.0
 sky_rotation = Vector3(0, 6.28319, 0)
-fog_enabled = true
+ambient_light_source = 1
+ambient_light_energy = 0.0
 fog_mode = 1
 fog_light_color = Color(0, 0, 0, 1)
 fog_light_energy = 2.5
 fog_sun_scatter = 0.64
 fog_density = 1.0
-fog_aerial_perspective = 0.195
 fog_height = 1024.0
 fog_depth_curve = 0.00133402
 fog_depth_begin = 1820.5
 fog_depth_end = 1820.5
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.6838
+volumetric_fog_density = 0.0473
 volumetric_fog_albedo = Color(0.212305, 0.212305, 0.212305, 1)
 volumetric_fog_detail_spread = 0.5
 
@@ -52,10 +53,6 @@ emission_energy_multiplier = 1.44
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2it3c"]
 
-[sub_resource type="FogMaterial" id="FogMaterial_33lhf"]
-albedo = Color(0.259294, 0.259294, 0.259294, 1)
-edge_fade = 1.21257
-
 [node name="MAIN" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -66,8 +63,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, 10, -0.434)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.413791, 0.716386, -0.561755, 0.31492, 0.691604, 0.650007, 0.854168, 0.0920594, -0.511784, -2.36199, 15.555, -11.2195)
-light_color = Color(0.866665, 0.889457, 1, 1)
-light_energy = 4.43
+light_color = Color(0.543153, 0.696866, 1, 1)
+light_energy = 2.491
 light_volumetric_fog_energy = 2.616
 light_angular_distance = 8.1
 light_bake_mode = 1
@@ -112,8 +109,6 @@ mesh_library = ExtResource("3_2it3c")
 physics_material = SubResource("PhysicsMaterial_2it3c")
 cell_size = Vector3(1, 1, 1)
 bake_navigation = true
-
-[node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(20.295, 0, 0, 0, 20.295, 0, 0, 0, 20.295, 0, 0, 0)
-size = Vector3(2, 5.65, 2)
-material = SubResource("FogMaterial_33lhf")
+data = {
+"cells": PackedInt32Array(1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 11, 8, 0, 11, 7, 0, 12, 7, 0, 12, 6, 0, 11, 6, 0, 10, 6, 0, 9, 6, 0, 8, 6, 0, 7, 6, 0, 6, 6, 0, 5, 6, 0, 4, 6, 0, 3, 6, 0, 3, 7, 0, 2, 7, 0, 1, 7, 0, 1, 6, 0, 2, 6, 0, 4, 7, 0, 5, 7, 0, 6, 7, 0, 7, 7, 0, 8, 7, 0, 9, 7, 0, 10, 7, 0, 12, 8, 0, 12, 9, 0)
+}
