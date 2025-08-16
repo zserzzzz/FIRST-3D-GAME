@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwhhv13i58gra"]
+
+[ext_resource type="Texture2D" uid="uid://pc7yjfcfbrgf" path="res://icon.svg" id="1_2sdpx"]
+[ext_resource type="PackedScene" uid="uid://bjpsb6ag0ycu6" path="res://Scenes/Character/character.tscn" id="1_wkls3"]
+[ext_resource type="PackedScene" uid="uid://ba4e2wjy7tefr" path="res://Scenes/square/square.tscn" id="2_5hrio"]
+[ext_resource type="MeshLibrary" uid="uid://7rl2bany260d" path="res://Assets/Resources/MainMeshLib.tres" id="3_2it3c"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j0i0r"]
+panorama = ExtResource("1_2sdpx")
+filter = false
+energy_multiplier = 37.6
+
+[sub_resource type="Sky" id="Sky_u5tma"]
+sky_material = SubResource("PanoramaSkyMaterial_j0i0r")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_6j7wv"]
+background_mode = 2
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_u5tma")
+sky_custom_fov = 29.0
+sky_rotation = Vector3(0, 6.28319, 0)
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 2.5
+fog_sun_scatter = 0.64
+fog_density = 1.0
+fog_aerial_perspective = 0.195
+fog_height = 1024.0
+fog_depth_curve = 0.00133402
+fog_depth_begin = 1820.5
+fog_depth_end = 1820.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.6838
+volumetric_fog_albedo = Color(0.212305, 0.212305, 0.212305, 1)
+volumetric_fog_detail_spread = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_5hrio"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2it3c"]
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.545623, 0.245277, 0.0134865, 1)
+metallic_specular = 0.0
+roughness_texture_channel = 1
+emission_enabled = true
+emission = Color(0.221527, 0.0637823, 0.0429231, 1)
+emission_energy_multiplier = 1.44
+
+[sub_resource type="BoxMesh" id="BoxMesh_2it3c"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2it3c"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_33lhf"]
+albedo = Color(0.259294, 0.259294, 0.259294, 1)
+edge_fade = 1.21257
+
+[node name="MAIN" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6j7wv")
+
+[node name="Character" parent="." instance=ExtResource("1_wkls3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, 10, -0.434)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.413791, 0.716386, -0.561755, 0.31492, 0.691604, 0.650007, 0.854168, 0.0920594, -0.511784, -2.36199, 15.555, -11.2195)
+light_color = Color(0.866665, 0.889457, 1, 1)
+light_energy = 4.43
+light_volumetric_fog_energy = 2.616
+light_angular_distance = 8.1
+light_bake_mode = 1
+shadow_enabled = true
+shadow_opacity = 0.7
+shadow_blur = 1.095
+directional_shadow_mode = 0
+
+[node name="SQUAREHOLDER" type="Node" parent="."]
+
+[node name="Square" parent="SQUAREHOLDER" instance=ExtResource("2_5hrio")]
+transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_5hrio")
+surface_material_override/0 = SubResource("StandardMaterial3D_2it3c")
+
+[node name="Square2" parent="SQUAREHOLDER" instance=ExtResource("2_5hrio")]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 900, 31, -0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_2it3c")
+surface_material_override/0 = SubResource("StandardMaterial3D_2it3c")
+
+[node name="Square3" parent="SQUAREHOLDER" instance=ExtResource("2_5hrio")]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 900, -30.493, -0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_2it3c")
+surface_material_override/0 = SubResource("StandardMaterial3D_2it3c")
+
+[node name="Square4" parent="SQUAREHOLDER" instance=ExtResource("2_5hrio")]
+transform = Transform3D(-4.37114e-08, 0, -900, 0, 100, 0, 1, 0, -3.93402e-05, 0.253485, -1.5, 30.7465)
+visible = false
+mesh = SubResource("BoxMesh_2it3c")
+surface_material_override/0 = SubResource("StandardMaterial3D_2it3c")
+
+[node name="Square5" parent="SQUAREHOLDER" instance=ExtResource("2_5hrio")]
+transform = Transform3D(-4.37114e-08, 0, -900, 0, 100, 0, 1, 0, -3.93402e-05, 0.253488, -0.5, -31.7465)
+visible = false
+mesh = SubResource("BoxMesh_2it3c")
+surface_material_override/0 = SubResource("StandardMaterial3D_2it3c")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("3_2it3c")
+physics_material = SubResource("PhysicsMaterial_2it3c")
+cell_size = Vector3(1, 1, 1)
+bake_navigation = true
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(20.295, 0, 0, 0, 20.295, 0, 0, 0, 20.295, 0, 0, 0)
+size = Vector3(2, 5.65, 2)
+material = SubResource("FogMaterial_33lhf")

@@ -1,0 +1,17 @@
+[gd_resource type="MeshLibrary" load_steps=4 format=3 uid="uid://7rl2bany260d"]
+
+[ext_resource type="BoxMesh" uid="uid://c2pfnr62lnjwg" path="res://Assets/Meshes/BoxMesh.tres" id="1_8gnse"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_8gnse"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gnse"]
+
+[resource]
+item/0/name = "Cube"
+item/0/mesh = ExtResource("1_8gnse")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_cast_shadow = 1
+item/0/shapes = [SubResource("BoxShape3D_8gnse"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh = SubResource("NavigationMesh_8gnse")
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1

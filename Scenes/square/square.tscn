@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba4e2wjy7tefr"]
+
+[ext_resource type="Shader" uid="uid://bthu84kmwcwtu" path="res://Scenes/square/square.gdshader" id="2_vcy6k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b615j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cag4j"]
+render_priority = 0
+shader = ExtResource("2_vcy6k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mdfwb"]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_b615j")
+surface_material_override/0 = SubResource("ShaderMaterial_cag4j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_mdfwb")
