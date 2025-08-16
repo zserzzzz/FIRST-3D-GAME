@@ -17,13 +17,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.19)
 [node name="Model" parent="." instance=ExtResource("2_isa4f")]
 transform = Transform3D(-0.7, 0, 6.11959e-08, 0, 0.7, 0, -6.11959e-08, 0, -0.7, 0, -1, 0)
 
-[node name="leg-left" parent="Model/character-d/root" index="0"]
-visible = false
-
-[node name="leg-right" parent="Model/character-d/root" index="1"]
-visible = false
-
 [node name="head" parent="Model/character-d/root/torso" index="2"]
 visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
 
 [editable path="Model"]
