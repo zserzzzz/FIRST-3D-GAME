@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjpsb6ag0ycu6"]
+[gd_scene load_steps=5 format=3 uid="uid://bjpsb6ag0ycu6"]
 
 [ext_resource type="Script" uid="uid://f1qa4b3wic4u" path="res://Code/Scripts/Character/character.gd" id="1_vwk55"]
 [ext_resource type="PackedScene" uid="uid://bwivyimph3k5n" path="res://Assets/characters/Scenes/character-d.fbx" id="2_isa4f"]
+[ext_resource type="Shape3D" uid="uid://bj8j8mw0w8su5" path="res://Assets/characters/Hitboxes/character_standing.tres" id="2_syf7y"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_isa4f"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_syf7y"]
+radius = 0.15
+height = 0.3
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_vwk55")
 
 [node name="CollShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 1.8, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource("BoxShape3D_isa4f")
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+shape = ExtResource("2_syf7y")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.19)
@@ -21,9 +24,7 @@ transform = Transform3D(-0.7, 0, 6.11959e-08, 0, 0.7, 0, -6.11959e-08, 0, -0.7, 
 [node name="head" parent="Model/character-d/root/torso" index="2"]
 visible = false
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(34.57, 0, 0, 0, 34.57, 0, 0, 0, 34.57, 0, -0.476424, 0)
-visible = false
-target_position = Vector3(0, 2, 0)
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("CapsuleShape3D_syf7y")
 
 [editable path="Model"]

@@ -26,7 +26,11 @@ var crouching = false
 @onready var anim_player: AnimationPlayer = $Model/AnimationPlayer
 @onready var model: Node3D = $Model
 @onready var hitbox: CollisionShape3D = $CollShape
+@onready var ray_cast_3d: RayCast3D = $RayCast3D
+var gridmap: GridMap
 
+func _enter_tree() -> void:
+	gridmap = $"../MainGridMap"
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -40,9 +44,12 @@ func _input(event):
 		crouching = true
 		SPEED = 5
 	elif event.is_action_pressed("crouch"):
-		hitbox.shape = HITBOX_STAND
-		crouching = false
-		SPEED = 10
+		ray_cast_3d.force_raycast_update()
+		print(ray_cast_3d.get_collider())
+		if ray_cast_3d.get_collider() != gridmap or ray_cast_3d.get_collider() == null:
+			hitbox.shape = HITBOX_STAND
+			crouching = false
+			SPEED = 10
 
 func _process(delta):
 	# Controller look input (Right Stick: axis 2 = horizontal, axis 3 = vertical)
