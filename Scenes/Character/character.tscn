@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" uid="uid://f1qa4b3wic4u" path="res://Code/Scripts/Character/character.gd" id="1_vwk55"]
 [ext_resource type="PackedScene" uid="uid://bwivyimph3k5n" path="res://Assets/characters/Scenes/character-d.fbx" id="2_isa4f"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_isa4f"]
+[ext_resource type="Shape3D" uid="uid://ncgr4budcpn5" path="res://Assets/characters/Hitboxes/character_standing_new.tres" id="2_syf7y"]
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_vwk55")
 
 [node name="CollShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 1.8, 0, 0, 0, 0.6, 0, 0, 0)
-shape = SubResource("BoxShape3D_isa4f")
+shape = ExtResource("2_syf7y")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.19)
