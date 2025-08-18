@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 # --- Preload ---
-const HITBOX_CROUCH = preload("res://Assets/characters/Hitboxes/character_crouching.tres")
-const HITBOX_STAND = preload("res://Assets/characters/Hitboxes/character_standing.tres")
+const HITBOX_CROUCH = preload("res://Assets/characters/Hitboxes/character_crouching_new.tres")
+const HITBOX_STAND = preload("res://Assets/characters/Hitboxes/character_standing_new.tres")
 
 
 # --- Movement ---
